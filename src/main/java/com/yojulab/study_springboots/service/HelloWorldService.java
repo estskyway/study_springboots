@@ -3,11 +3,23 @@ package com.yojulab.study_springboots.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.yojulab.study_springboots.dao.SharedDao;
+
 @Service
 public class HelloWorldService {
+    @Autowired
+    SharedDao sharedDao;
+    public int fakeSelect(String companyId){
+        HashMap dataMap = new HashMap<>();
+        dataMap.put("companyId", companyId);
+        sharedDao.getOne("fake.selectByUID", dataMap);
+        return 0;
+    }
+
     public ArrayList fakeSelect(String currentPage, String perPage){
         
             // "spm_row": 471, "SN": 1, "CMPNM": "로이유통", "RDNMADR": null
