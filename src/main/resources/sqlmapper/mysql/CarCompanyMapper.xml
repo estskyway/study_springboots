@@ -8,10 +8,10 @@
         where 1 = 1
         <choose>
             <when test="search == 'COMPANY_ID'">
-            and COMPANY_ID like CONCAT(#{words}, '%')  <!-- words = 현 -->
+            and COMPANY_ID like CONCAT(#{words}, '%')  <!-- words = CP -->
             </when>
             <otherwise>  
-            and COMPANY like CONCAT(#{words}, '%')  <!-- words = CP -->
+            and COMPANY like CONCAT(#{words}, '%')  <!-- words = 현 -->
             </otherwise>
         </choose>
         ;

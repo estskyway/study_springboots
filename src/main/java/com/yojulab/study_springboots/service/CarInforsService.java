@@ -15,6 +15,14 @@ public class CarInforsService {
     @Autowired
     SharedDao sharedDao;
 
+    // foreach HashMap.put("CAR_INFOR_ID_LIST", CAR_INFOR_ID_LIST)
+    public Object selectInUID(Map dataMap){
+        String sqlMapId = "CarInfors.selectInUID";  
+
+        Object result = sharedDao.getList(sqlMapId, dataMap);
+        return result;
+    }
+
     // 검색(조건-search : COMPANY, CAR_NAME)
     public Object selectSearch(String search, String words){
         // Object getOne(String sqlMapId, Object dataMap)

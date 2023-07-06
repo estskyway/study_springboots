@@ -16,9 +16,21 @@ import com.yojulab.study_springboots.service.CarInforsService;
 
 
 @RestController
-public class CarInforsController {
+public class CarInforsRestController {
     @Autowired
     CarInforsService carInforsService;
+
+    @GetMapping("/selectInUID")
+    public ResponseEntity selectInUID(@RequestBody Map paramMap){
+        Object result = null;
+        try {
+            result = carInforsService.selectInUID(paramMap);
+        } catch (Exception e) {
+          return ResponseEntity.badRequest().body(result);
+        }
+        
+        return ResponseEntity.ok().body(result);
+    }
 
     // /selectSearch/YEAR/2020
     // /selectSearch/CAR_NAME/소

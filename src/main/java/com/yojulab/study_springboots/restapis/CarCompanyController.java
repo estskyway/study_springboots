@@ -20,12 +20,14 @@ public class CarCompanyController {
     @Autowired
     CarCompanyService carCompanyService;
 
+    // all
     @GetMapping("/carCompanyAll/{COMPANY_ID}")
     public ResponseEntity selectAll(@PathVariable String COMPANY_ID){
         Object result = carCompanyService.selectAll(COMPANY_ID);
         return ResponseEntity.ok().body(result);
     }
 
+    // search
     @GetMapping("/carCompanySearch/{search}/{words}")
     public ResponseEntity selectSearch(@PathVariable String search, @PathVariable String words){
         Object result = carCompanyService.selectSearch(search, words);
