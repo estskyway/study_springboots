@@ -1,3 +1,5 @@
+<%@ page import="java.util.HashMap, java.util.ArrayList" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,49 +36,57 @@
         </div>
     </nav>
 
-
+    <%
+    HashMap params = (HashMap) request.getAttribute("params");
+    String searchStr = (String) params.getOrDefault("search", "");
+    HashMap result = (HashMap) request.getAttribute("result");
+    %>
     <!-- Main Content -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
                 <h2>Search</h2>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search..." id="keydownEnter">
-                    <button class="btn btn-primary" type="button" onclick="carTableBody()">Go</button>
+                    <form action="/carInfor/selectSearch" method="get">
+                        <select class="form-select" name="search">
+                            <option >Select an option...</option>
+                            <option value="YEAR" <%= (searchStr.equals("YEAR")) ? "selected" : "" %>>YEAR</option>
+                            <option value="CAR_NAME" <%= (searchStr.equals("CAR_NAME")) ? "selected" : "" %>>CAR_NAME</option>
+                        </select>
+                        <input type="text" name="words" value="<%= params.getOrDefault("words", "") %>" class="form-control" placeholder="Search..." id="keydownEnter">
+                        <button class="btn btn-primary" type="submit" >Go</button>
+                    </form>
                 </div>
                 <h2>Table</h2>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Year</th>
-                            <th>Car Name</th>
+                            <th>Car Name</th>                           
                             <th>ID</th>
                             <th>Manufacturer ID</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody id="carTableBody">
-                        <form>
-                            <input type="hidden" name="CAR_INFOR_ID" value="?" id="">
-                            <tr>
-                                <td>2021</td>
-                                <td>코나</td>
-                                <td>CAR-01</td>
-                                <td>FA-01</td>
-                                <td><button formaction="http://127.0.0.1:8080/carInfor/delete" formmethod="post">Del</button></td>
-                            </tr>
-                        </form>
-                        <form action="" method=""></form>
-                        <input type="hidden" name="CAR_INFOR_ID" value="?" id="">
-
-                            <tr>
-                                <td>2020</td>
-                                <td>요주랩</td>
-                                <td>CAR-02</td>
-                                <td>FA-01</td>
-                                <td><button formaction="http://127.0.0.1:8080/carInfor/delete" formmethod="post">Del</button></td>
-                            </tr>
-                        </form>
+                        <% 
+                        ArrayList resultList = (ArrayList)result.get("resultList");
+                        for(int i=0; i < resultList.size(); i=i+1){
+                            HashMap record = (HashMap)resultList.get(i);
+                        %>
+                    <form>
+                        <input type="hidden" name="CAR_INFOR_ID" value='<%= record.get("CAR_INFOR_ID") %>' id="">
+                        <tr>
+                            <td><%= record.get("YEAR") %></td>
+                            <td><%= record.get("CAR_NAME") %></td>                      
+                            <td><%= record.get("CAR_INFOR_ID") %></td>
+                            <td><%= record.get("COMPANY_ID") %></td>
+                            <td><button formaction="/carInfor/deleteAndSelectSearch" formmethod="post">Del</button></td>
+                        </tr>
+                    </form>
+                    <%
+                        }
+                    %>
                         <!-- Empty -->
                     </tbody>
                 </table>

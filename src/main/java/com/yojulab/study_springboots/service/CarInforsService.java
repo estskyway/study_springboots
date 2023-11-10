@@ -77,6 +77,28 @@ public class CarInforsService {
         return result;
     }
 
+    // MVC view
+    public Object delete(Map dataMap) {
+        String sqlMapId = "CarInfors.delete";
+
+        Object result = sharedDao.delete(sqlMapId, dataMap);
+        return result;
+    }
+
+    // MVC view
+    public Object deleteAndSelectSearch(Map dataMap) {
+        HashMap result = new HashMap<>();
+        // String sqlMapId = "CarInfors.delete";
+        // result.put("deleteCount", sharedDao.delete(sqlMapId, dataMap));
+        result.put("deleteCount", this.delete(dataMap));
+
+        // sqlMapId = "CarInfors.selectSearch";
+        // result.put("resultList", sharedDao.getOne(sqlMapId, dataMap));
+        result.put("resultList", this.selectSearch(dataMap));
+        return result;
+    }
+
+    // rest api
     public Object delete(String CAR_INFOR_ID) {
         String sqlMapId = "CarInfors.delete";
         HashMap dataMap = new HashMap<>();

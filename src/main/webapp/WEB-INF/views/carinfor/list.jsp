@@ -64,6 +64,7 @@
                             <th>Car Name</th>                           
                             <th>ID</th>
                             <th>Manufacturer ID</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody id="carTableBody">
@@ -72,12 +73,16 @@
                         for(int i=0; i < resultList.size(); i=i+1){
                             HashMap record = (HashMap)resultList.get(i);
                     %>
-                    <tr>
-                        <td><%= record.get("YEAR") %></td>
-                        <td><%= record.get("CAR_NAME") %></td>                      
-                        <td><%= record.get("CAR_INFOR_ID") %></td>
-                        <td><%= record.get("COMPANY_ID") %></td>
-                    </tr>
+                    <form>
+                        <input type="hidden" name="CAR_INFOR_ID" value='<%= record.get("CAR_INFOR_ID") %>' id="">
+                        <tr>
+                            <td><%= record.get("YEAR") %></td>
+                            <td><%= record.get("CAR_NAME") %></td>                      
+                            <td><%= record.get("CAR_INFOR_ID") %></td>
+                            <td><%= record.get("COMPANY_ID") %></td>
+                            <td><button formaction="/carInfor/deleteAndSelectSearch" formmethod="post">Del</button></td>
+                        </tr>
+                    </form>
                     <%
                         }
                     %>
