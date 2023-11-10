@@ -50,7 +50,7 @@ public class CarInforsController {
     }
 
     // delete with MVC
-    @PostMapping("/deleteAndSelectSearch")
+    @GetMapping("/deleteAndSelectSearch")
     public ModelAndView deleteAndSelectSearch(@RequestParam Map params, ModelAndView modelAndView){
         Object result = carInforsService.deleteAndSelectSearch(params);
         modelAndView.addObject("params", params);

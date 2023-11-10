@@ -81,7 +81,7 @@
                             <td><%= record.get("CAR_NAME") %></td>                      
                             <td><%= record.get("CAR_INFOR_ID") %></td>
                             <td><%= record.get("COMPANY_ID") %></td>
-                            <td><button formaction="/carInfor/deleteAndSelectSearch" formmethod="post">Del</button></td>
+                            <td><button formaction="/carInfor/deleteAndSelectSearch" formmethod="get">Del</button></td>
                         </tr>
                     </form>
                     <%
